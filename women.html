@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FNS Clothing Shop</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        .section {
+            margin: 0 20px;
+            text-align: center;
+        }
+        .section img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome To FNS Clothing Shop!</h1>
+    <p>select section below for shopping</p>
+    <div class="container">
+        <div class="section">
+            <img src="./images/womenformal1" alt="Formal Section">
+            <a href="womenformals.html" class="button">Formal</a>
+        </div>
+        <div class="section">
+            <img src="./images/womencasual2" alt="Casual Section">
+            <a href="womencasuals.html" class="button">Casual</a>
+        </div>
+        <div class="section">
+            <img src="./images/womenethnic1" alt="Ethnic Section">
+            <a href="womenethnics.html" class="button">Ethnic</a>
+        </div>
+    </div>
+</body>
+</html>

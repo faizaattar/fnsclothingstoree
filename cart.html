@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(120deg, #f6d365, #fda085);
+        }
+        .cart-container {
+            margin-top: 50px;
+            width: 80%;
+            max-width: 1000px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .item-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .item-details h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .item-details p {
+            margin: 5px 0;
+            color: #555;
+        }
+        .item-actions {
+            display: flex;
+            align-items: center;
+        }
+        .item-actions button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .proceed-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Shopping Cart</h1>
+    <div class="cart-container" id="cart-container">
+        <!-- Cart items will be dynamically inserted here -->
+    </div>
+    <a href="checkout.html" class="proceed-button">Proceed to Buy</a>
+
+    <script>
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        function renderCart() {
+            const cartContainer = document.getElementById('cart-container');
+            cartContainer.innerHTML = '';
+
+            cartItems.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-details">
+                        <h3>${item.name}</h3>
+                        <p>Price: ${item.price}</p>
+                        <p>Size: ${item.size}</p>
+                        <p>Quantity: ${item.quantity}</p>
+                    </div>
+                    <div class="item-actions">
+                        <button onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+
+                cartContainer.appendChild(cartItem);
+            });
+        }
+
+        function removeItem(index) {
+            cartItems.splice(index, 1);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            renderCart();
+        }
+
+        renderCart();
+    </script>
+</body>
+</html>

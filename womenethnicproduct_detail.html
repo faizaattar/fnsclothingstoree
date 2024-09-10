@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .product-container {
+            margin-top: 50px;
+            width: 80%;
+            max-width: 900px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .product-container img {
+            width: 50%;
+            height: 50%;
+            border-radius: 10px;
+        }
+        .details, .reviews, .rating {
+            margin-top: 20px;
+            text-align: left;
+            width: 100%;
+        }
+        .details h2, .details p {
+            margin: 10px 0;
+        }
+        .size-quantity {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .size-quantity div {
+            width: 48%;
+        }
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .button:hover {
+            background-color: #333;
+        }
+        .rating {
+            text-align: right;
+        }
+        .reviews {
+            margin-top: 30px;
+        }
+        .reviews h3 {
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .reviews ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .reviews li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .review-input {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .review-input input, .review-input textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .review-input button {
+            align-self: flex-start;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .review-input button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1><b>FNS Clothing Store</b></h1>
+    <p><b>Women's Ethnic Wear</b></p>
+    <div class="product-container">
+        <center><img id="product-image" src="" alt="Product Image"></center>
+        <div class="details">
+            <h2 id="product-name"></h2>
+            <p id="product-price"></p>
+
+            <div class="size-quantity">
+                <div>
+                    <label for="size">Size:</label>
+                    <select id="size">
+                        <option value="S">Small (S)</option>
+                        <option value="M">Medium (M)</option>
+                        <option value="L">Large (L)</option>
+                        <option value="XL">Extra Large (XL)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" value="1" min="1">
+                </div>
+            </div>
+
+            <div class="button" id="add-to-cart">Add to Cart</div>
+            <div class="button" id="buy-now">Buy Now</div>
+        </div>
+        <div class="rating">
+            <p id="product-rating"></p>
+        </div>
+        <div class="reviews">
+            <h3>Customer Reviews</h3>
+            <ul id="reviews-list">
+                <!-- Customer reviews will go here -->
+            </ul>
+        </div>
+        <div class="review-input">
+            <h3>Write a Review</h3>
+            <input type="text" id="reviewer-name" placeholder="Your Name">
+            <textarea id="review-text" rows="4" placeholder="Your Review"></textarea>
+            <button class="button" id="submit-review">Submit Review</button>
+        </div>
+    </div>
+
+    <script>
+        // Get product name from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('product');
+
+        // Example product data
+        const productData = {
+            "Product 1": {
+                image: "./images/womenethnic1",
+                price: "$10.00",
+                rating: "4.2 ★"
+            },
+            "Product 2": {
+                image: "./images/indianred1",
+                price: "$20.00",
+                rating: "4.5 ★"
+            },
+            "Product 3": {
+                image: "./images/womenethnic2",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 4": {
+                image: "./images/womenethnic3",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 5": {
+                image: "./images/womenethnic4",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 6": {
+                image: "./images/womenethnic5",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 7": {
+                image: "./images/womenethnic6",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 8": {
+                image: "./images/womenethnic7",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 9": {
+                image: "./images/womenethnic8",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 10": {
+                image: "./images/womenethnic9",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 11": {
+                image: "./images/womenethnic10",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            "Product 12": {
+                image: "./images/womenethnic11",
+                price: "$30.00",
+                rating: "3.9 ★"
+            },
+            // Add more products as needed
+        };
+
+        // Set product details
+        if (productData[productName]) {
+            document.getElementById('product-image').src = productData[productName].image;
+            document.getElementById('product-name').textContent = productName;
+            document.getElementById('product-price').textContent = productData[productName].price;
+            document.getElementById('product-rating').textContent = productData[productName].rating;
+        }
+
+        // Add event listener for Add to Cart button
+        document.getElementById('add-to-cart').addEventListener('click', () => {
+            const size = document.getElementById('size').value;
+            const quantity = document.getElementById('quantity').value;
+            alert(`${productName} (${size}, Quantity: ${quantity}) added to cart!`);
+        });
+
+        // Add event listener for Buy Now button
+        document.getElementById('buy-now').addEventListener('click', () => {
+            window.location.href = 'checkout.html';
+        });
+
+        // Handle review submission
+        document.getElementById('submit-review').addEventListener('click', () => {
+            const name = document.getElementById('reviewer-name').value;
+            const review = document.getElementById('review-text').value;
+            if (name && review) {
+                const reviewList = document.getElementById('reviews-list');
+                const newReview = document.createElement('li');
+                newReview.textContent = `${name}: ${review}`;
+                reviewList.appendChild(newReview);
+            }
+        });
+    </script>
+</body>
+</html>
